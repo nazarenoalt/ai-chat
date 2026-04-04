@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": ".",
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["dist", "node_modules"],
+}
