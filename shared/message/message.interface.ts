@@ -1,3 +1,4 @@
-export interface Message {
-  
+export interface MessageParam {
+  role: string;
+  content: string;
 }

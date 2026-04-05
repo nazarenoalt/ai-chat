@@ -1,29 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { CreateChatDto } from './dto/create-chat.dto';
-import { UpdateChatDto } from './dto/update-chat.dto';
+import { AiService } from '../ai/ai.service';
+import { resolveSystemPrompt } from './helpers/resolve-system-prompt.helper';
+import { MessageDto } from './dto/message.dto';
 
 @Injectable()
 export class ChatService {
-  constructor() {
-    this.client = new Anth
-  }
-  create(createChatDto: CreateChatDto) {
-    return 'This action adds a new chat';
+  systemPrompt: string;
+
+  constructor(private readonly aiService: AiService) {
+    this.systemPrompt = resolveSystemPrompt();
   }
 
-  findAll() {
-    return `This action returns all chat`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} chat`;
-  }
-
-  update(id: number, updateChatDto: UpdateChatDto) {
-    return `This action updates a #${id} chat`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} chat`;
+  stream(dto: MessageDto) {
+    return this.aiService.stream(dto.messages, this.systemPrompt);
   }
 }
